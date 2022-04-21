@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/dam-enablement-training" mode="merge"/>
+    <filter root="/content/dam-enablement-training" mode="merge"/>
+    <filter root="/content/dam/dam-enablement-training/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/dam-enablement-training" mode="merge"/>
+</workspaceFilter>
