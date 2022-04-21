@@ -51,6 +51,8 @@
                         <!-- DAM folder root, will be created via repoinit -->
                         <filter><root>/content/dam/dam-enablement-training</root></filter>
 
+                        <!-- Index -->
+                        <filter><root>/oak:index</root></filter>
                     </filters>
                 </configuration>
             </plugin>
