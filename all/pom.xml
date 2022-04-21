@@ -53,6 +53,7 @@
                     <packageType>container</packageType>
                     <!-- skip sub package validation for now as some vendor packages like CIF apps will not pass -->
                     <skipSubPackageValidation>true</skipSubPackageValidation>
+                    <allowIndexDefinitions>true</allowIndexDefinitions>
                     <embeddeds>
                         <embedded>
                             <groupId>io.ecx.training.dam</groupId>
