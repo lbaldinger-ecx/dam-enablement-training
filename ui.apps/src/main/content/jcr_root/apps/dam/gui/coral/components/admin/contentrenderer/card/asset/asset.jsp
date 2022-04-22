@@ -51,6 +51,7 @@ attrs.add("data-item-type", type);
 
 request.setAttribute("com.adobe.assets.meta.attributes", metaAttrs);
 %>
+<cq:include script = "../../common/asset/customAssetMetaAttributes.jsp"/>
 <cq:include script = "meta.jsp"/>
 <coral-card <%= attrs.build() %>>
     <coral-card-asset>
@@ -72,6 +73,7 @@ request.setAttribute("com.adobe.assets.meta.attributes", metaAttrs);
         <link rel="properties" href="<%=xssAPI.getValidHref(navigationHref)%>">
     </coral-card-content>
     <cq:include script = "../common/card-banner.jsp"/>
+    <cq:include script = "../../common/asset/customAssetActionRels.jsp"/>
 	<cq:include script = "applicableRelationships.jsp"/>
 </coral-card>
 

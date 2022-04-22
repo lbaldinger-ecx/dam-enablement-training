@@ -42,7 +42,9 @@
                         <filter><root>/apps/sling</root></filter>
                         <filter><root>/apps/cq</root></filter>
                         <filter><root>/apps/dam</root></filter>
+                        <filter><root>/apps/dam/gui/content</root></filter>
                         <filter><root>/apps/dam/gui/coral/components/admin</root></filter>
+                        <filter><root>/apps/dam/gui/coral/components/admin/clientlibs</root></filter>
                         <filter><root>/apps/wcm</root></filter>
                         <filter><root>/apps/msm</root></filter>
 
