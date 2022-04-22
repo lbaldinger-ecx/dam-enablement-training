@@ -3,9 +3,12 @@
     <filter root="/conf/dam-enablement-training" mode="merge"/>
     <filter root="/conf/global/settings/dam/adminui-extension/metadataschema/my-schema"/>
     <filter root="/conf/global/settings/dam/search/facets/assets"/>
+    <filter root="/conf/global/settings/workflow/models/my-custom-dam-workflow"/>
 
     <filter root="/content/cq:tags/properties/resolution" mode="merge"/>
     <filter root="/content/dam-enablement-training" mode="merge"/>
     <filter root="/content/dam/dam-enablement-training/asset.jpg" mode="merge"/>
     <filter root="/content/experience-fragments/dam-enablement-training" mode="merge"/>
+
+    <filter root="/var/workflow/models/my-custom-dam-workflow"/>
 </workspaceFilter>

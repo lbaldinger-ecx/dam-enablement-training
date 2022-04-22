@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:designPath="/libs/settings/wcm/designs/default"
+        cq:lastModified="{Date}2022-04-21T10:36:36.902+02:00"
+        cq:lastModifiedBy="admin"
+        cq:tags="[workflow:dam]"
+        cq:template="/libs/cq/workflow/templates/model"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="My Custom DAM Workflow"
+        sling:resourceType="cq/workflow/components/pages/model"
+        lastSynced="{Date}2022-04-21T10:36:39.456+02:00"
+        transient="true">
+        <flow
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="foundation/components/parsys">
+            <process_930895259_co
+                jcr:created="{Date}2022-04-20T11:22:57.636+02:00"
+                jcr:createdBy="admin"
+                jcr:lastModified="{Date}2022-04-20T12:03:07.831+02:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Add Resolution Tag"
+                sling:resourceType="cq/workflow/components/model/process">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="io.ecx.training.dam.core.workflow.ResolutionTagProcess"
+                    PROCESS_ARGS="720x576=properties:resolution/sd&#xd;&#xa;1080x720=properties:resolution/hd&#xd;&#xa;1920x1080=properties:resolution/fhd&#xd;&#xa;2560x1440=properties:resolution/qhd&#xd;&#xa;3840x2160=properties:resolution/4k&#xd;&#xa;7680x4320=properties:resolution/8k"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </process_930895259_co>
+            <damupdateassetworkfl
+                jcr:created="{Date}2022-04-21T10:36:01.758+02:00"
+                jcr:createdBy="admin"
+                jcr:description="This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed"
+                jcr:lastModified="{Date}2022-04-21T10:36:07.057+02:00"
+                jcr:lastModifiedBy="admin"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="DAM Update Asset Workflow Completed"
+                sling:resourceType="dam/components/workflow/damupdateassetworkflowcompletedprocess">
+                <metaData
+                    jcr:primaryType="nt:unstructured"
+                    PROCESS="com.day.cq.dam.core.impl.process.DamUpdateAssetWorkflowCompletedProcess"
+                    PROCESS_AUTO_ADVANCE="true"/>
+            </damupdateassetworkfl>
+        </flow>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,6 @@
+// Configuration created by Apache Sling JCR Installer
+{
+  "postProcWorkflowsByPath":[
+    "/content/dam/dam-enablement-training:/var/workflow/models/my-custom-dam-workflow"
+  ]
+}

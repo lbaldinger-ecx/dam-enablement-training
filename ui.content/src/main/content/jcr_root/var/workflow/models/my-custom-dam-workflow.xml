@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:isCheckedOut="{Boolean}false"
+    jcr:primaryType="cq:WorkflowModel"
+    jcr:uuid="5c38aa2b-3f29-4667-bf7a-1629290ff79f"
+    sling:resourceType="cq/workflow/components/model"
+    description="No Description"
+    title="My Custom DAM Workflow">
+    <metaData
+        cq:generatingPage="/conf/global/settings/workflow/models/my-custom-dam-workflow/jcr:content"
+        cq:lastModified="{Long}1650530199462"
+        cq:lastModifiedBy="admin"
+        jcr:primaryType="nt:unstructured"
+        lastSynced="{Date}2022-04-21T10:36:39.456+02:00"
+        tags="dam"
+        transient="true"/>
+    <nodes jcr:primaryType="nt:unstructured">
+        <node0
+            jcr:primaryType="cq:WorkflowNode"
+            title="Start"
+            type="START">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node0>
+        <node1
+            jcr:primaryType="cq:WorkflowNode"
+            title="Add Resolution Tag"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="io.ecx.training.dam.core.workflow.ResolutionTagProcess"
+                PROCESS_ARGS="720x576=properties:resolution/sd&#xd;&#xa;1080x720=properties:resolution/hd&#xd;&#xa;1920x1080=properties:resolution/fhd&#xd;&#xa;2560x1440=properties:resolution/qhd&#xd;&#xa;3840x2160=properties:resolution/4k&#xd;&#xa;7680x4320=properties:resolution/8k"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node1>
+        <node2
+            jcr:primaryType="cq:WorkflowNode"
+            description="This process will send DamEvent.Type.DAM_UPDATE_ASSET_WORKFLOW_COMPLETED event when DAM update asset workflow is completed"
+            title="DAM Update Asset Workflow Completed"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="com.day.cq.dam.core.impl.process.DamUpdateAssetWorkflowCompletedProcess"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node2>
+        <node3
+            jcr:primaryType="cq:WorkflowNode"
+            title="End"
+            type="END">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node3>
+    </nodes>
+    <transitions jcr:primaryType="nt:unstructured">
+        <node0_x0023_node1
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node0"
+            rule=""
+            to="node1">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node0_x0023_node1>
+        <node1_x0023_node2
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node1"
+            rule=""
+            to="node2">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node1_x0023_node2>
+        <node2_x0023_node3
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node2"
+            to="node3">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node2_x0023_node3>
+    </transitions>
+</jcr:root>
