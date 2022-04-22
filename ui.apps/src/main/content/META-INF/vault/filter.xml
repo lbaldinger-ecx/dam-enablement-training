@@ -7,6 +7,7 @@
     <filter root="/apps/dam-enablement-training/clientlibs"/>
     <filter root="/apps/dam-enablement-training/components"/>
     <filter root="/apps/dam-enablement-training/i18n"/>
+    <filter root="/apps/dam-enablement-training/projects"/>
 
     <filter root="/oak:index/damAssetLucene-7-custom-1"/>
 </workspaceFilter>
