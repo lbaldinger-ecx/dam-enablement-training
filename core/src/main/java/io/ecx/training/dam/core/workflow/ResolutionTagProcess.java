@@ -33,21 +33,22 @@ public class ResolutionTagProcess implements WorkflowProcess {
     public void execute(final WorkItem workItem, final WorkflowSession workflowSession, final MetaDataMap processArguments) throws WorkflowException {
         try {
             final ResourceResolver resourceResolver = workflowSession.adaptTo(ResourceResolver.class);
-            final String assetPath = this.getAssetPathFromPayload(workItem);
-            if (assetPath != null) {
+
+            if (StringUtils.equals(workItem.getWorkflowData().getPayloadType(), PayloadMap.TYPE_JCR_PATH)) {
+                final String assetPath = workItem.getWorkflowData().getPayload().toString();
                 final Resource assetResource = resourceResolver.getResource(assetPath);
                 final Resource metadataResource = resourceResolver.getResource(assetResource, "jcr:content/metadata");
-                final ModifiableValueMap metadataMVM = metadataResource.adaptTo(ModifiableValueMap.class);
+                final ModifiableValueMap metadataVM = metadataResource.adaptTo(ModifiableValueMap.class);
 
-                final long imageResolution = this.getImageResolution(metadataMVM);
+                final long nPixels = this.getNumberOfPixels(metadataVM);
 
-                if (imageResolution > 0) {
+                if (nPixels > 0) {
                     final TreeMap<Long, String> resolutionTagMapping = this.getResolutionTagMapping(processArguments);
-                    final String biggestResolutionTag = this.getBiggestResolutionTag(imageResolution, resolutionTagMapping);
+                    final String matchingTag = this.getMatchingResolutionTag(nPixels, resolutionTagMapping);
 
-                    if (biggestResolutionTag != null) {
-                        logger.info("Adding resolution tag {} to asset {}", biggestResolutionTag, assetPath);
-                        metadataMVM.putIfAbsent("my:resolution", biggestResolutionTag);
+                    if (matchingTag != null) {
+                        logger.info("Adding resolution tag {} to asset {}", matchingTag, assetPath);
+                        metadataVM.putIfAbsent("my:resolution", matchingTag);
                     }
                 }
             }
@@ -56,11 +57,7 @@ public class ResolutionTagProcess implements WorkflowProcess {
         }
     }
 
-    private String getAssetPathFromPayload(final WorkItem workItem) {
-        return StringUtils.equals(workItem.getWorkflowData().getPayloadType(), PayloadMap.TYPE_JCR_PATH) ? workItem.getWorkflowData().getPayload().toString() : null;
-    }
-
-    private long getImageResolution(final ModifiableValueMap metadataMVM) {
+    private long getNumberOfPixels(final ModifiableValueMap metadataMVM) {
         final long imageWidth = metadataMVM.get(DamConstants.TIFF_IMAGEWIDTH, metadataMVM.get(DamConstants.EXIF_PIXELYDIMENSION, 0L));
         final long imageHeight = metadataMVM.get(DamConstants.TIFF_IMAGELENGTH, metadataMVM.get(DamConstants.EXIF_PIXELXDIMENSION, 0L));
         return imageWidth * imageHeight;
@@ -94,11 +91,11 @@ public class ResolutionTagProcess implements WorkflowProcess {
         return mapping;
     }
 
-    private String getBiggestResolutionTag(final long imageResolution, final TreeMap<Long, String> resolutionTagMapping) {
+    private String getMatchingResolutionTag(final long nPixel, final TreeMap<Long, String> resolutionTagMapping) {
         String biggestResolutionTag = null;
 
         for (final Map.Entry<Long, String> mappingEntry : resolutionTagMapping.entrySet()) {
-            if (imageResolution >= mappingEntry.getKey()) {
+            if (nPixel >= mappingEntry.getKey()) {
                 biggestResolutionTag = mappingEntry.getValue();
             }
         }
